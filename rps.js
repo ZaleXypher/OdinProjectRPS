@@ -12,12 +12,6 @@ function getCompChoice() {
     return compChoice
 }
 
-function getPlayerChoice() {
-    let getChoice = prompt("Rock, paper, or scissors?", "")
-    let playerChoice = getChoice
-    return playerChoice
-}
-
 function getWin(pChoice, cChoice){
     if(pChoice === "rock" && cChoice === "scissors"){
         alert(`Computer picked ${cChoice}, you won`)
@@ -41,24 +35,52 @@ function getWin(pChoice, cChoice){
     }
 }
 
+function play() {
+    currentRound += 1
+    roundBoard.textContent = currentRound + 1
+
+    win = getWin(playerChoice, getCompChoice())
+    if(win === 1){
+        playerScore++
+        humanBoard.textContent = playerScore
+    }
+    else if(win === 0){ 
+        compScore++
+        compBoard.textContent = compScore
+    }
+    else {
+        playerScore++
+        compScore++
+        humanBoard.textContent = playerScore
+        compBoard.textContent = compScore
+    }
+
+    if (currentRound >= roundPlays) {
+        rock.disabled = true
+        paper.disabled = true
+        scissors.disabled = true
+    }
+}
+
+function reset() { 
+    roundPlays = roundInput
+    currentRound = 1
+    roundBoard.textContent = currentRound
+    compScore = 0
+    playerScore = 0
+    rock.disabled = false
+    paper.disabled = false
+    scissors.disabled = false
+}
+/*
 function playRound() {
     let compScore = 0
     let playerScore = 0
-    let roundPlayed = prompt("How many rounds do you want to play?", "1")
-    for (i = 0; i < roundPlayed; i++){
-        let play = getPlayerChoice()
-        console.log(play)
-        win = getWin(play, getCompChoice())
-        console.log(win)
-        if(win === 1){
-            playerScore++
-            console.log("P++")
-        }
-        else if(win === 0){ 
-            compScore++
-            console.log("C++")
-        }
-        else console.log("tie")
+    
+    for (i = 0; i < roundPlays; i++){
+        
+
+        playerChoice = ""
     }
     if (playerScore>compScore){
         alert(`Player won with a score of ${playerScore}-${compScore}`)
@@ -68,3 +90,32 @@ function playRound() {
     }
     else alert(`Computer won with a score of ${playerScore}-${compScore}`)
 }
+    */
+
+
+const rock = document.querySelector("#rock")
+const paper = document.querySelector("#paper")
+const scissors = document.querySelector("#scissors")
+rock.addEventListener("click", () => {playerChoice="rock"; play()})
+paper.addEventListener("click", () => {playerChoice="paper"; play()})
+scissors.addEventListener("click", () => {playerChoice="scissors"; play()})
+
+rock.disabled = true
+paper.disabled = true
+scissors.disabled = true
+
+
+const playButt = document.querySelector("#roundsButt")
+playButt.addEventListener("click", reset)
+
+const rounds = document.querySelector("#rounds")
+rounds.addEventListener("change", () => roundInput = rounds.valueAsNumber)
+roundInput = rounds.valueAsNumber
+
+const roundBoard = document.querySelector("#roundNum")
+
+currentRound = 1
+playerChoice = ""
+
+const humanBoard = document.querySelector("#human")
+const compBoard = document.querySelector("#comp")

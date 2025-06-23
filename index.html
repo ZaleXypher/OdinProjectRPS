@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors!</title>
-    <script src="rps.js"></script>
+    <script src="rps.js" defer></script>
+    <link href="index.css" rel="stylesheet">
 </head>
 <body>
-    <script>playRound()</script>
+    <div id="roundNum">0</div>
+    <div class="scores">
+        <div class="score" id="human"></div>
+        <div class="score" id="comp"></div>
+    </div>
+    <div class="humanInput">
+        <button type="button" class="rps" id="rock">Rock</button>
+        <button type="button" class="rps" id="paper">Paper</button>
+        <button type="button" class="rps" id="scissors">Scissors</button>
+    </div>
+    <div class="winner"></div>
+    <div class="roundInput">
+        <label class="inputTitle">How many rounds do you want to play?</label>
+        <div class="inputs">
+            <input type="number" id="rounds" min="1" placeholder="10">
+            <button type="submit" id="roundsButt">Play</button>
+        </div>
+    </div>
 </body>
 </html>
