@@ -66,6 +66,8 @@ function play() {
             winAnn.textContent = `Tie with a score of ${playerScore}-${compScore}`
         }
         else winAnn.textContent = `Computer won with a score of ${playerScore}-${compScore}`
+
+        setTimeout(() => winAnn.textContent = '', 1500)
     }
 }
 
@@ -80,25 +82,11 @@ function reset() {
     rock.disabled = false
     paper.disabled = false
     scissors.disabled = false
+    winAnn.textContent = ''
 }
 
 function showChoice(target) {
-    console.log(target)
 }
-/*
-function playRound() {
-    let compScore = 0
-    let playerScore = 0
-    
-    for (i = 0; i < roundPlays; i++){
-        
-
-        playerChoice = ""
-    }
-
-}
-    */
-
 
 const rock = document.querySelector("#rock")
 const paper = document.querySelector("#paper")
