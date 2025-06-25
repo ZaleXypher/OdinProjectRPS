@@ -13,32 +13,32 @@ function getCompChoice() {
 }
 
 function getWin(pChoice, cChoice){
-    if(pChoice === "rock" && cChoice === "scissors"){
-        alert(`Computer picked ${cChoice}, you won`)
+    if(pChoice == "rock" && cChoice == "scissors"){
+        winAnn.textContent = `Computer picked ${cChoice}, you won`
         return 1
     }
-    else if(pChoice === "paper" && cChoice === "rock"){
-        alert(`Computer picked ${cChoice}, you won`)
+    else if(pChoice == "paper" && cChoice == "rock"){
+        winAnn.textContent = `Computer picked ${cChoice}, you won`
         return 1
     }
-    else if(pChoice === "scissors" && cChoice === "paper"){
-        alert(`Computer picked ${cChoice}, you won`)
+    else if(pChoice == "scissors" && cChoice == "paper"){
+        winAnn.textContent = `Computer picked ${cChoice}, you won`
         return 1
     }
-    else if(pChoice === cChoice){
-        alert(`Computer picked ${cChoice}, tied`)
+    else if(pChoice == cChoice){
+        winAnn.textContent = `Computer picked ${cChoice}, tied`
         return 2
     }
     else{
-        alert(`Computer picked ${cChoice}, you lost`)
+        winAnn.textContent =`Computer picked ${cChoice}, you lost`
         return 0
     }
 }
 
 function play() {
     currentRound += 1
-    roundBoard.textContent = currentRound + 1
-
+    roundBoard.textContent = currentRound
+    
     win = getWin(playerChoice, getCompChoice())
     if(win === 1){
         playerScore++
@@ -59,6 +59,13 @@ function play() {
         rock.disabled = true
         paper.disabled = true
         scissors.disabled = true
+        if (playerScore>compScore){
+            winAnn.textContent = `Player won with a score of ${playerScore}-${compScore}`
+        }
+        else if (playerScore == compScore){
+            winAnn.textContent = `Tie with a score of ${playerScore}-${compScore}`
+        }
+        else winAnn.textContent = `Computer won with a score of ${playerScore}-${compScore}`
     }
 }
 
@@ -68,9 +75,15 @@ function reset() {
     roundBoard.textContent = currentRound
     compScore = 0
     playerScore = 0
+    humanBoard.textContent = playerScore
+    compBoard.textContent = compScore
     rock.disabled = false
     paper.disabled = false
     scissors.disabled = false
+}
+
+function showChoice(target) {
+    console.log(target)
 }
 /*
 function playRound() {
@@ -82,13 +95,7 @@ function playRound() {
 
         playerChoice = ""
     }
-    if (playerScore>compScore){
-        alert(`Player won with a score of ${playerScore}-${compScore}`)
-    }
-    else if (playerScore === compScore){
-        alert(`Tie with a score of ${playerScore}-${compScore}`)
-    }
-    else alert(`Computer won with a score of ${playerScore}-${compScore}`)
+
 }
     */
 
@@ -96,9 +103,9 @@ function playRound() {
 const rock = document.querySelector("#rock")
 const paper = document.querySelector("#paper")
 const scissors = document.querySelector("#scissors")
-rock.addEventListener("click", () => {playerChoice="rock"; play()})
-paper.addEventListener("click", () => {playerChoice="paper"; play()})
-scissors.addEventListener("click", () => {playerChoice="scissors"; play()})
+rock.addEventListener("click", (roc) => {playerChoice="rock"; play(); showChoice(roc.target)})
+paper.addEventListener("click", (pap) => {playerChoice="paper"; play(); showChoice(pap.target)})
+scissors.addEventListener("click", (sci) => {playerChoice="scissors"; play(); showChoice(sci.target)})
 
 rock.disabled = true
 paper.disabled = true
@@ -119,3 +126,4 @@ playerChoice = ""
 
 const humanBoard = document.querySelector("#human")
 const compBoard = document.querySelector("#comp")
+const winAnn = document.querySelector(".winner")

@@ -8,10 +8,19 @@
     <link href="index.css" rel="stylesheet">
 </head>
 <body>
-    <div id="roundNum">0</div>
+    <div class="Rnd">
+        <div class="curRnd">Current Round :</div>
+        <div id="roundNum">0</div>
+    </div>
     <div class="scores">
-        <div class="score" id="human"></div>
-        <div class="score" id="comp"></div>
+        <div class="humBoard">
+            <div class="humTitle">Player Score</div>
+            <div class="score" id="human">0</div>
+        </div>
+        <div class="compBoard">
+            <div class="compTitle">Computer Score</div>
+            <div class="score" id="comp">0</div>
+        </div>
     </div>
     <div class="humanInput">
         <button type="button" class="rps" id="rock">Rock</button>
